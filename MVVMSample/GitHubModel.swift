@@ -26,6 +26,7 @@ class GitHubModel {
                     }
                 }
             }
+            
             task.resume()
             return Disposables.create()
         }
@@ -37,8 +38,12 @@ struct GitHubItem: Codable {
 }
 
 struct Repository: Codable {
-    let id: Int
-    let name: String
     let full_name: String
+    let html_url: String
 }
 
+struct Prefecture: Codable {
+    let name_ja: String
+    let hospitalize: Int
+    let deaths: Int
+}

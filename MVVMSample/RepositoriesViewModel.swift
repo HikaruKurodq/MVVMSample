@@ -12,10 +12,12 @@ import RxCocoa
 protocol RepositoriesViewModelInputs {
     var onSearchButtonClick: PublishRelay<Void> { get }
     var searchWord: PublishRelay<String> { get }
+    var onModelSelect: PublishRelay<Repository> { get }
 }
 
 protocol RepositoriesViewModelOutputs {
-    var repositories: BehaviorSubject<[Repository]> { get }
+    var repositories: BehaviorRelay<[Repository]> { get }
+    var selectedRepository: PublishRelay<Repository> { get }
 }
 
 protocol RepositoriesViewModelType {
@@ -31,15 +33,16 @@ class RepositoriesViewModel: RepositoriesViewModelType, RepositoriesViewModelInp
     //MARK: - Inputs
     var onSearchButtonClick = PublishRelay<Void>()
     var searchWord = PublishRelay<String>()
+    var onModelSelect = PublishRelay<Repository>()
     
     //MARK: - Outputs
-    var repositories = BehaviorSubject<[Repository]>(value: [])
+    var repositories = BehaviorRelay<[Repository]>(value: [])
+    var selectedRepository = PublishRelay<Repository>()
     
     private let model = GitHubModel()
     private let bag = DisposeBag()
     
     init() {
-        
         onSearchButtonClick
             .withLatestFrom(searchWord)
             .flatMap{ [unowned self] searchWord -> Observable<[Repository]> in
@@ -48,6 +51,9 @@ class RepositoriesViewModel: RepositoriesViewModelType, RepositoriesViewModelInp
             .bind(to: repositories)
             .disposed(by: bag)
         
+        onModelSelect
+            .bind(to: selectedRepository)
+            .disposed(by: bag)
     }
 
     

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,7 @@
 		E93AADBB262E9804000B2D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E93AADB9262E9804000B2D7C /* LaunchScreen.storyboard */; };
 		E93AADC4262E9849000B2D7C /* RepositoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AADC3262E9849000B2D7C /* RepositoriesViewModel.swift */; };
 		E93AADC8262E9850000B2D7C /* GitHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AADC7262E9850000B2D7C /* GitHubModel.swift */; };
+		E93AADEA26314DC6000B2D7C /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93AADE926314DC6000B2D7C /* SampleViewController.swift */; };
 		EDAA321831AC2FAFCDC3518A /* Pods_MVVMSample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16E5653BDBD8BEC657AE4010 /* Pods_MVVMSample.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +32,7 @@
 		E93AADBC262E9804000B2D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E93AADC3262E9849000B2D7C /* RepositoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoriesViewModel.swift; sourceTree = "<group>"; };
 		E93AADC7262E9850000B2D7C /* GitHubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubModel.swift; sourceTree = "<group>"; };
+		E93AADE926314DC6000B2D7C /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
 		FAAFF128B92F359609A2316A /* Pods-MVVMSample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MVVMSample.debug.xcconfig"; path = "Target Support Files/Pods-MVVMSample/Pods-MVVMSample.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -60,7 +62,6 @@
 				FAAFF128B92F359609A2316A /* Pods-MVVMSample.debug.xcconfig */,
 				D246C5FD1916C624B45844CD /* Pods-MVVMSample.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -94,6 +95,7 @@
 				E93AADB7262E9804000B2D7C /* Assets.xcassets */,
 				E93AADB9262E9804000B2D7C /* LaunchScreen.storyboard */,
 				E93AADBC262E9804000B2D7C /* Info.plist */,
+				E93AADE926314DC6000B2D7C /* SampleViewController.swift */,
 			);
 			path = MVVMSample;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 			files = (
 				E93AADC8262E9850000B2D7C /* GitHubModel.swift in Sources */,
 				E93AADB3262E9803000B2D7C /* RepositoriesViewController.swift in Sources */,
+				E93AADEA26314DC6000B2D7C /* SampleViewController.swift in Sources */,
 				E93AADAF262E9803000B2D7C /* AppDelegate.swift in Sources */,
 				E93AADC4262E9849000B2D7C /* RepositoriesViewModel.swift in Sources */,
 				E93AADB1262E9803000B2D7C /* SceneDelegate.swift in Sources */,
