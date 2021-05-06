@@ -9,52 +9,41 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol RepositoriesViewModelInputs {
-    var onSearchButtonClick: PublishRelay<Void> { get }
-    var searchWord: PublishRelay<String> { get }
-    var onModelSelect: PublishRelay<Repository> { get }
-}
-
-protocol RepositoriesViewModelOutputs {
-    var repositories: BehaviorRelay<[Repository]> { get }
-    var selectedRepository: PublishRelay<Repository> { get }
-}
-
-protocol RepositoriesViewModelType {
-    var inputs: RepositoriesViewModelInputs { get }
-    var outputs: RepositoriesViewModelOutputs { get }
-}
-
-class RepositoriesViewModel: RepositoriesViewModelType, RepositoriesViewModelInputs, RepositoriesViewModelOutputs {
+class RepositoriesViewModel {
     
-    var inputs: RepositoriesViewModelInputs { return self }
-    var outputs: RepositoriesViewModelOutputs { return self }
+    public struct Input {
+        var onSearchButtonClick: Signal<Void>
+        var searchWord: Driver<String>
+        var onModelSelect: Signal<Repository>
+    }
     
-    //MARK: - Inputs
-    var onSearchButtonClick = PublishRelay<Void>()
-    var searchWord = PublishRelay<String>()
-    var onModelSelect = PublishRelay<Repository>()
-    
-    //MARK: - Outputs
-    var repositories = BehaviorRelay<[Repository]>(value: [])
-    var selectedRepository = PublishRelay<Repository>()
+    public struct Output {
+        var repositories: Driver<[Repository]>
+        var selectedRepositoryURL: Signal<URL>
+    }
     
     private let model = GitHubModel()
     private let bag = DisposeBag()
     
     init() {
-        onSearchButtonClick
-            .withLatestFrom(searchWord)
-            .flatMap{ [unowned self] searchWord -> Observable<[Repository]> in
-                model.searchRepositories(with: searchWord)
-            }
-            .bind(to: repositories)
-            .disposed(by: bag)
         
-        onModelSelect
-            .bind(to: selectedRepository)
-            .disposed(by: bag)
     }
-
     
+    func transform(input: Input) -> Output {
+        let repositories = input.onSearchButtonClick
+            .withLatestFrom(input.searchWord)
+            .flatMap{ [unowned self] in model.searchRepositories(with: $0).asDriver(onErrorJustReturn: []) }
+            
+        let selectedRepositoryURL = input.onModelSelect
+            .map{ URL(string: $0.html_url)! }
+            .asSignal(onErrorSignalWith: .empty())
+        
+        return Output(repositories: repositories,
+                      selectedRepositoryURL: selectedRepositoryURL)
+    }
 }
+
+
+
+
+
